@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'app/services/DataService';
 
 @Component({
   selector: 'app-clients',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientsComponent implements OnInit {
 
-  constructor() { }
+  BSTCBSCMs: any[];
+
+  constructor( private data: DataService ) { }
 
   ngOnInit() {
+    this.data.getClients()
+    .subscribe((x) => {
+      console.log(x);
+      this.BSTCBSCMs = x;
+    })
   }
-
 }

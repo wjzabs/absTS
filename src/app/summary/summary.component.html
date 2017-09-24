@@ -1,0 +1,157 @@
+<p-panel>
+    <p-header>
+      Analyst
+      Current Billing Period YYYY-PP
+    </p-header>
+   
+    <div class="ui-g-12 ui-md-4">
+        <div class="ui-inputgroup">
+          <input #frameMfg="ngModel" id="frameMfg" pInputText  type="text" placeholder="Analyst" name="frameMfg" [(ngModel)]="SYS_ANALYST_ID">
+          <input #frameModel="ngModel" id="frameMfg" pInputText  type="text" placeholder="Name" name="frameMfg" [(ngModel)]="SYS_ANALYST_NAME">
+      </div>
+    </div>
+  
+    <p-footer>
+      <button p-button type="button" (click)='clicked()'>Clear</button>
+      <button p-button type="button" color="primary" type="submit">Submit</button>
+      <button p-button type="button" color="warn">Save / Finish Later</button>
+    </p-footer>
+  
+  </p-panel>
+  
+  <div class="card card-header">
+    <article class="main">
+      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam,
+        feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+        mi vitae est. Mauris placerat eleifend leo.</p>
+  
+    </article>
+  </div>
+  
+  <div class="aside aside-1">
+    <h3>Calendar</h3>
+  
+    <div class="card card-body">
+  
+  
+      <div class="month">
+        <ul>
+          <li class="prev"> &#10094;</li>
+          <li class="next">&#10095; </li>
+          <li style="text-align: center">
+            {{monthName}}<br>
+            <span style="font-size:14px">{{year}}</span>
+          </li>
+        </ul>
+      </div>
+  
+      <ul class="weekdays">
+        <li>Su</li>
+        <li>Mo</li>
+        <li>Tu</li>
+        <li>We</li>
+        <li>Th</li>
+        <li>Fr</li>
+        <li>Sa</li>
+      </ul>
+  
+      <ul class="days" *ngIf="days">
+        <li *ngFor="let day of days" (click)="selectDay(day)" 
+        [ngClass]="{'today': day.today, 'selected-day': isSelectedDay(day.dayno)}">
+          {{day.date}}</li>
+      </ul>
+  
+  
+    </div>
+    <div *ngIf="selectedDayNo">
+      <h3>Details for {{ selectedDay.dateF }}</h3>
+      <div class="card card-body" style="width:500px">
+        <p-dataTable [value]="BSTCBSB2s_D" [resizableColumns]="true" [editable]=true
+        >
+          <p-column *ngFor="let grdColumn of grdFormats.BSTCBSB2s_D" 
+          [field]="grdColumn.COLUMN_NAME" sortable="true"  [editable]=true
+          [style]="{'width': grdColumn.COLUMN_WIDTH + '%'}"
+          [header]="grdColumn.COLUMN_CAPTION">
+          
+          <ng-template *ngIf="grdColumn.COLUMN_NAME == 'CLIENT_CODE'" 
+              let-col let-car="rowData" pTemplate="editor">
+              <p-dropdown [(ngModel)]="car[col.field]" [options]="CLIENT_CODEs" 
+              [autoWidth]="false" [style]="{'width':'100%'}" 
+              required="true"  appendTo="body"></p-dropdown>
+          </ng-template>
+          
+          <ng-template *ngIf="grdColumn.COLUMN_NAME == 'PROJECT_CODE'" 
+              let-col let-car="rowData" pTemplate="editor">
+              <p-dropdown [(ngModel)]="car[col.field]" [options]="PROJECT_CODEs" 
+              [autoWidth]="false" [style]="{'width':'100%'}" 
+              required="true"  appendTo="body"></p-dropdown>
+          </ng-template>
+  
+           <ng-template *ngIf="grdColumn.COLUMN_NAME == 'LAST_DATE'" 
+              let-col let-car="rowData" pTemplate="body">
+               {{car[col.field]|date }}
+          </ng-template>
+          <ng-template *ngIf="grdColumn.COLUMN_NAME == 'LAST_DATE'" 
+              let-col let-car="rowData" pTemplate="editor">
+              <p-calendar [(ngModel)]="car[col.field]"></p-calendar>
+          </ng-template>
+  
+          </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+  
+  
+  </div>
+  
+  <div class="aside aside-2">
+    <h3>Summary by Client</h3>
+    <div class="card card-body" style="width:500px">
+      <p-dataTable [value]="BSTCBSBXs" [resizableColumns]="true"  [editable]=true
+      >
+        <p-column *ngFor="let grdColumn of grdFormats.BSTCBSBX" 
+        [field]="grdColumn.COLUMN_NAME" sortable="true" [editable]=true [filter]="true" 
+        [style]="{'width': grdColumn.COLUMN_WIDTH + '%'}"   
+      
+          filterMatchMode="contains" [header]="grdColumn.COLUMN_CAPTION">
+  
+          <ng-template *ngIf="grdColumn.COLUMN_NAME == 'CLIENT_CODE'" 
+              let-col let-car="rowData" pTemplate="editor">
+              <p-dropdown [(ngModel)]="car[col.field]" [options]="CLIENT_CODEs" 
+              [autoWidth]="false" [style]="{'width':'100%'}" 
+              required="true"  appendTo="body"></p-dropdown>
+          </ng-template>
+                          
+           <ng-template *ngIf="grdColumn.COLUMN_NAME == 'HRSLMO'" 
+              let-col let-car="rowData" pTemplate="body">
+               <span style="text-align: right" class="td-right">{{car[col.field] | number : '1.2-2'}}</span>
+          </ng-template>
+                          
+           <ng-template *ngIf="grdColumn.COLUMN_NAME == 'LAST_DATE'" 
+              let-col let-car="rowData" pTemplate="body">
+               <span>{{car[col.field] | date: 'MM-dd-yyyy'}}</span>
+          </ng-template>
+  
+          <ng-template *ngIf="grdColumn.COLUMN_NAME == 'LAST_DATE'" 
+              let-col let-car="rowData" pTemplate="editor">
+              <p-calendar [(ngModel)]="car[col.field]"></p-calendar>
+          </ng-template>
+  
+        </p-column>
+  
+  
+   
+  
+      </p-dataTable>
+    </div>
+  
+    <h3>Details for CCC</h3>
+    <div class="card card-body">
+      <span>MM/DD/YYYY X 99.9 xxxxxxxxxxxxxxxxx</span>
+      <br/>
+      <span>MM/DD/YYYY X 99.9 xxxxxxxxxxxxxxxxx</span>
+    </div>
+  
+  </div>
+  
+  <footer class="footer">Footer</footer>

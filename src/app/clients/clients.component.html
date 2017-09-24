@@ -1,3 +1,40 @@
-<p>
-  clients works!
-</p>
+<p-panel>
+  <p-header>
+    Clients
+  </p-header>
+
+  <p-dataList [value]="BSTCBSCMs" [paginator]="true" [rows]="5">
+    <p-header>
+        List of Clients
+    </p-header>
+    <ng-template let-BSTCBSCM pTemplate="item">
+        <div class="ui-g ui-fluid BSTCBSCM-item">
+            <div class="ui-g-12 ui-md-3" style="text-align:center">
+                <!-- <img src="assets/img/clients/{{BSTCBSCM.CLIENT_CODE}}.png"> -->
+                <img style="height:80px; max-width:150px;" 
+                src="assets/img/clients/{{BSTCBSCM.CLIENT_CODE}}.png" 
+                onerror="this.src='assets/img/clients/ABS.png'" alt="hello"/>
+            </div>
+            <div class="ui-g-12 ui-md-9 BSTCBSCM-details">
+                <div class="ui-g">
+                   
+                    <div class="ui-g-2 ui-sm-6" style="font-weight: bold; color:blue">{{BSTCBSCM.CLIENT_CODE}}</div>
+                    <div class="ui-g-10 ui-sm-6">{{BSTCBSCM.CLIENT_NAME}}</div>
+                    
+                    <div class="ui-g-2 ui-sm-6">City: </div>
+                    <div class="ui-g-10 ui-sm-6">{{BSTCBSCM.CLIENT_CITY}}</div>
+                    
+                    <div class="ui-g-2 ui-sm-6">State: </div>
+                    <div class="ui-g-10 ui-sm-6">{{BSTCBSCM.CLIENT_STATE}}</div>
+                </div>
+                <hr/>
+            </div>
+            
+        </div>
+    </ng-template>
+</p-dataList>
+
+<p-footer>
+    &copy; 2017 Applied Business Systems, Inc.
+  </p-footer>
+</p-panel>

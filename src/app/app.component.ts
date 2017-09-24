@@ -25,17 +25,21 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
     let handleSelected = function(event) {
+
       let allMenus = jQuery(event.originalEvent.target).closest('ul');
       let allLinks = allMenus.find('.menu-selected');
-
+      // console.log(allLinks);
       allLinks.removeClass("menu-selected");
       let selected = jQuery(event.originalEvent.target).closest('a');
       selected.addClass('menu-selected');
+      // console.log(selected);
     }
 
     this.menuItems = [
       {label: 'Dashboard', icon: 'fa-home', routerLink: ['/dashboard'], command: (event) => handleSelected(event)},
-      {label: 'Timesheets', icon: 'fa-calendar', routerLink: ['/timesheets'], command: (event) => handleSelected(event)},
+      {label: 'Calendar', icon: 'fa-calendar', routerLink: ['/calendar'], command: (event) => handleSelected(event)},
+      {label: 'Summary', icon: 'fa-address-card-o', routerLink: ['/summary'], command: (event) => handleSelected(event)},
+      {label: 'Timesheets', icon: 'fa-calendar-times-o', routerLink: ['/timesheets'], command: (event) => handleSelected(event)},
       {label: 'Timesheet', icon: 'fa-clock-o', routerLink: ['/timesheet'], command: (event) => handleSelected(event)},
       {label: 'Clients', icon: 'fa-tasks', routerLink: ['/clients'], command: (event) => handleSelected(event)},
       {label: 'Profile', icon: 'fa-users', routerLink: ['/profile'], command: (event) => handleSelected(event)},

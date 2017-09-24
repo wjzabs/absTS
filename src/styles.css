@@ -26,8 +26,15 @@ body {
     font-size: large !important;
     margin-right: 1em;
   }
+
+    
+  .ui-menuitem-link:hover {
+    background-color: rgb(255, 159, 4) !important;
+    /* background-color: rgb(255, 207, 49) !important; */
+    color: rgb(0, 0, 0);
+  }
   
-  .menu-selected {
+  .menu-selectedx {
     background-color: #F15B2A !important;
     /* background-color: #2882F1 !important; */
     color: #ffffff;
