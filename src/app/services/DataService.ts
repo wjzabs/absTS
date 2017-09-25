@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Response, Http, Headers, RequestOptions, ResponseContentType} from "@angular/http";
+import { Injectable } from '@angular/core';
+import { Response, Http, Headers, RequestOptions, ResponseContentType } from "@angular/http";
 import 'rxjs';
-import {Observable} from 'rxjs/Observable';
-import {saveToJSONFile} from "app/services/utilities";
+import { Observable } from 'rxjs/Observable';
+import { saveToJSONFile } from "app/services/utilities";
 // import * as FileSaver from 'file-saver'; 
 
 export interface BSTCBSCM {
@@ -36,10 +36,31 @@ export class DataService {
         let headers = new Headers();
         headers.append('Authorization', this.ABS_Authorization);
         headers.append('Content-Type', "application/json");
-        return {headers: headers};
+        return { headers: headers };
     }
 
-     
+    getAnalyst(SYS_ANALYST_ID: string): Observable<any> {
+
+        // let body = {"BILLING_PERIOD": BILLING_PERIOD, "SYS_ANALYST_ID": SYS_ANALYST_ID};      
+        let body = {};
+        let myParams = new URLSearchParams();
+        myParams.append('id', SYS_ANALYST_ID);	
+        let myHeaders = new Headers();
+        myHeaders.append('Authorization', this.ABS_Authorization);
+        myHeaders.append('Content-Type', "application/json");
+        let options = new RequestOptions({ headers: myHeaders, params: myParams });
+        // I WOULD LIKE TO GET THE VERSION WITH OPTIONS TO WORK
+        return this.http.get(`${this.baseUrl}GetAnalyst/${SYS_ANALYST_ID}`, options)
+            .map((response: Response) => {
+                // let x:any = response.json();
+                console.log(response);
+                return response.json();
+            })
+            // .catch(this.handleError);
+    }
+
+ 
+
     getClients(): Observable<any> {
 
         // let body = {"BILLING_PERIOD": BILLING_PERIOD, "SYS_ANALYST_ID": SYS_ANALYST_ID};      
@@ -59,13 +80,13 @@ export class DataService {
     }
 
     getInvoicePDFp(PO_ORDER_NO) {
-        let body = {"PO_ORDER_NO": PO_ORDER_NO};
+        let body = { "PO_ORDER_NO": PO_ORDER_NO };
         let headers = new Headers();
         headers.append('Content-Type', 'application/json'); //x-www-form-urlencoded
         headers.append('Accept', 'application/pdf');
         headers.append('Authorization', this.ABS_Authorization);
 
-        let options = new RequestOptions({headers: headers})
+        let options = new RequestOptions({ headers: headers })
         // Ensure you set the responseType to Blob.
         options.responseType = ResponseContentType.Blob;
 
@@ -104,7 +125,7 @@ export class DataService {
 
 
     getTimesheets(BILLING_PERIOD: string, SYS_ANALYST_ID: string): Observable<any> {
-        let body = {"BILLING_PERIOD": BILLING_PERIOD, "SYS_ANALYST_ID": SYS_ANALYST_ID};      
+        let body = { "BILLING_PERIOD": BILLING_PERIOD, "SYS_ANALYST_ID": SYS_ANALYST_ID };
         return this.http.post(`${this.baseUrl}GetTimesheets`, body, this.getHeaders())
             .map((response: Response) => {
                 // let x:any = response.json();
@@ -113,12 +134,12 @@ export class DataService {
     }
 
     getTimesheet(PO_ORDER_NO): Observable<any> {
-        let body = {"PO_ORDER_NO": PO_ORDER_NO};
+        let body = { "PO_ORDER_NO": PO_ORDER_NO };
         let headers = new Headers();
         headers.append('Content-Type', 'application/json'); //x-www-form-urlencoded
         headers.append('Authorization', this.ABS_Authorization);
 
-        return this.http.post(`${this.baseUrl}GetTimesheet`, body, {headers: headers})
+        return this.http.post(`${this.baseUrl}GetTimesheet`, body, { headers: headers })
             .map((response: Response) => {
                 // this.POTORDR1 = response.json().POTORDR1;
                 this.BSTCBSB2s = response.json().BSTCBSB2s;
@@ -139,12 +160,12 @@ export class DataService {
         }
 
         else {
-            let body = {"TABLE_NAME": TABLE_NAME, "where_clause": where_clause};
+            let body = { "TABLE_NAME": TABLE_NAME, "where_clause": where_clause };
             let headers = new Headers();
             headers.append('Content-Type', 'application/json'); //x-www-form-urlencoded
             headers.append('Authorization', this.ABS_Authorization);
             //   console.log(TABLE_NAME);
-            return this.http.post(`${this.baseUrl}GetData`, body, {headers: headers})
+            return this.http.post(`${this.baseUrl}GetData`, body, { headers: headers })
                 .map((response: Response) => {
                     this.data = response.json().data;
                     // console.log(this.data);

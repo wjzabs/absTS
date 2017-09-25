@@ -1,30 +1,78 @@
-<p-schedule [events]="events" [header]="header" [defaultDate]="getDate()" [eventRender]="eventRender"
-[eventLimit]="4" [editable]="true" (onDayClick)="handleDayClick($event)"
-  (onEventClick)="handleEventClick($event)"></p-schedule>
+<div>
+  <h3>qTip2 test example with empty title/content</h3>
+  <hr/>
+  <div my-qtip qtip-title="Here is my title" qtip-content="Here is my content">
+    Hover me to see my tooltip.
+  </div>
+  <div my-qtip style="color:green;" skin="green" qtip-title="I only have title">
+    Hover me to see my title
+  </div>
+  <div my-qtip style="color:red;" skin="red" qtip-content="I only have content">
+    Hover me to see my content
+  </div>
+  <hr/>
+</div>
 
-<p-dialog header="Event Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false" [contentStyle]="{'overflow':'visible'}"
-  [style]="{'overflow':'visible'}" [resizable]="false">
+<p-growl [value]="msgs"></p-growl>
+
+<p-carousel headerText="Clients" [value]="BSTCBSBCs" numVisible="6" easing="easeOutStrong">
+    <ng-template let-BSTCBSBC pTemplate="item">
+        <div class="ui-grid ui-grid-responsive">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12"><img style="display:block; margin:0 auto;" src="assets/img/clients/{{BSTCBSBC.CLIENT_CODE}}.png" height="60px" max-width="80px"></div>
+            </div>
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-12" >
+                    <button type="button" pButton 
+                    [label]="BSTCBSBC.CLIENT_CODE + ' ' + BSTCBSBC.HOURS_CHARGED + ' hours'" 
+                    icon="fa-search" style="width:100%;"
+                    style.background-color="{{BSTCBSBC.color}}"
+                    (click)="selectClient(BSTCBSBC)"></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-carousel>
+<input type="checkbox">Show Selected Only
+<hr/>
+
+<p-schedule [events]="events" [header]="header" [defaultDate]="getDate()" [eventRender]="eventRender" [eventLimit]="4" [editable]="true"
+  (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)"></p-schedule>
+
+<p-dialog header="Timesheet Details" [(visible)]="dialogVisible"  [width]="300" [dismissableMask]="true" 
+[responsive]="true" showEffect="fade" [modal]="true" [contentStyle]="{'overflow':'visible'}"
+  [style]="{'overflow':'visible'}" [resizable]="true">
   <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="event">
+
     <div class="ui-grid-row">
-      <div class="ui-grid-col-4"><label for="vin">Title</label></div>
-      <div class="ui-grid-col-8"><input pInputText id="title" [(ngModel)]="event.title" /></div>
-    </div>
-    <div class="ui-grid-row">
-      <div class="ui-grid-col-4"><label for="start">Start</label></div>
-      <div class="ui-grid-col-8">
-        <p-calendar [(ngModel)]="event.start" dateFormat="yy-mm-dd" dataType="string"></p-calendar>
+      <div class="ui-grid-col-6"><label for="DATE_OF_SERVICE">Date of Service</label></div>
+      <div class="ui-grid-col-6">
+        <p-calendar [(ngModel)]="event.DATE_OF_SERVICE" dateFormat="yy-mm-dd" dataType="string"></p-calendar>
       </div>
     </div>
     <div class="ui-grid-row">
-      <div class="ui-grid-col-4"><label for="end">End</label></div>
-      <div class="ui-grid-col-8">
-        <p-calendar [(ngModel)]="event.end" dateFormat="yy-mm-dd" dataType="string"></p-calendar>
-      </div>
+      <div class="ui-grid-col-6"><label for="CLIENT_CODE">Client</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="CLIENT_CODE" [(ngModel)]="event.CLIENT_CODE" /></div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="PROJECT_CODE">Project</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="PROJECT_CODE" [(ngModel)]="event.PROJECT_CODE" /></div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="DESC_OF_SERVICE">Description</label></div>
     </div>
     <div class="ui-grid-row">
-      <div class="ui-grid-col-4"><label for="allday">All Day</label></div>
-      <div class="ui-grid-col-8">
-        <p-checkbox [(ngModel)]="event.allDay" binary="checkbox"></p-checkbox>
+      <div class="ui-grid-col-12">
+        <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize" id="DESC_OF_SERVICE" [(ngModel)]="event.DESC_OF_SERVICE"></textarea>
+      </div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="HOURS_CHARGED">Hours</label></div>
+      <div class="ui-grid-col-6">
+        <input type="number" pInputText id="HOURS_CHARGED" [(ngModel)]="event.HOURS_CHARGED" />
       </div>
     </div>
   </div>

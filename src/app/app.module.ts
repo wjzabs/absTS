@@ -14,7 +14,8 @@ import { MenuModule, PanelModule, DataListModule, ScheduleModule, DialogModule, 
   InputMaskModule, InputTextareaModule, EditorModule, RadioButtonModule, FieldsetModule,
   MultiSelectModule, ListboxModule, SpinnerModule, SliderModule, RatingModule, ContextMenuModule,
   TabViewModule, StepsModule, TreeModule, GMapModule, DataGridModule, TooltipModule,
-  ConfirmDialogModule, GrowlModule, DragDropModule, GalleriaModule, SharedModule, CheckboxModule
+  ConfirmDialogModule, GrowlModule, DragDropModule, GalleriaModule, SharedModule, 
+  CheckboxModule, CarouselModule, MessagesModule
 } from "primeng/primeng";
 
 import {RouterModule, Routes} from "@angular/router";
@@ -26,6 +27,9 @@ import { ClientsComponent } from './clients/clients.component';
 import { DataService } from "app/services/DataService";
 import { SummaryComponent } from './summary/summary.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { MyQtipDirective } from './my-qtip.directive';
+import { TodoComponent } from './todo/todo.component';
+import { MenuComponent } from './menu/menu.component';
 // import { TS2DataService } from "app/services/TSdata";
 
 const appRoutes: Routes = [
@@ -38,6 +42,8 @@ const appRoutes: Routes = [
   { path: "clients", component: ClientsComponent},
   { path: "profile", component: ProfileComponent},
   { path: "settings", component: SettingsComponent},
+  { path: "todo", component: TodoComponent},
+  { path: "menu", component: MenuComponent},
 ];
 
 @NgModule({
@@ -51,7 +57,10 @@ const appRoutes: Routes = [
     ClientsComponent,
     SummaryComponent,
     CalendarComponent,
-    StatisticComponent 
+    StatisticComponent,
+    MyQtipDirective,
+    TodoComponent,
+    MenuComponent 
   ],
   imports: [
     BrowserModule,
@@ -70,7 +79,7 @@ const appRoutes: Routes = [
     SliderModule, RatingModule, ContextMenuModule,
     TabViewModule, StepsModule, TreeModule, GMapModule,
     DataGridModule, TooltipModule, ConfirmDialogModule,
-    GrowlModule, DragDropModule, GalleriaModule, SharedModule
+    GrowlModule, DragDropModule, GalleriaModule, SharedModule, CarouselModule, MessagesModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

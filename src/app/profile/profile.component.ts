@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'app/services/DataService';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  BSTCBSSA: any;
+
+  constructor( private data: DataService ) { }
 
   ngOnInit() {
+    this.data.getAnalyst('WJZ')
+    .subscribe((x) => {
+      console.log(x);
+      this.BSTCBSSA = x;
+    })
   }
-
 }

@@ -1,3 +1,89 @@
-<p>
-  profile works!
-</p>
+<p-panel>
+  <p-header>
+    Analyst Profile
+  </p-header>
+
+  <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="BSTCBSSA">
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="SYS_ANALYST_ID">ID</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="SYS_ANALYST_ID" [(ngModel)]="BSTCBSSA.SYS_ANALYST_ID" /></div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="SYS_ANAL_NAME_F">First Name</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="SYS_ANAL_NAME_F" [(ngModel)]="BSTCBSSA.SYS_ANAL_NAME_F" /></div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="SYS_ANAL_NAME_M">Middle Name</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="SYS_ANAL_NAME_M" [(ngModel)]="BSTCBSSA.SYS_ANAL_NAME_M" /></div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="SYS_ANAL_NAME_L">Last Name</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="SYS_ANAL_NAME_L" [(ngModel)]="BSTCBSSA.SYS_ANAL_NAME_L" /></div>
+    </div>
+
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="ADDRESS_L1">Address 1</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="ADDRESS_L1" [(ngModel)]="BSTCBSSA.ADDRESS_L1" /></div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="ADDRESS_L2">Address 2</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="ADDRESS_L2" [(ngModel)]="BSTCBSSA.ADDRESS_L2" /></div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="CITY">City</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="CITY" [(ngModel)]="BSTCBSSA.CITY" /></div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="STATE_CODE">State</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="STATE_CODE" [(ngModel)]="BSTCBSSA.STATE_CODE" /></div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="ZIP_CODE">Zip C0de</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="ZIP_CODE" [(ngModel)]="BSTCBSSA.ZIP_CODE" /></div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="TEL_HOME">Telephone</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="TEL_HOME" [(ngModel)]="BSTCBSSA.TEL_HOME" /></div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="ADP_FILE_NO">Adp</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="ADP_FILE_NO" [(ngModel)]="BSTCBSSA.ADP_FILE_NO" /></div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="SOCIAL_SEC_NO">SS No</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="SOCIAL_SEC_NO" [(ngModel)]="BSTCBSSA.SOCIAL_SEC_NO" /></div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="DATE_OF_BIRTH">DOB</label></div>
+      <div class="ui-grid-col-6">
+        <p-calendar [(ngModel)]="BSTCBSSA.DATE_OF_BIRTH" dateFormat="yy-mm-dd" dataType="string"></p-calendar>
+      </div>
+    </div>
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-6"><label for="YYYYMM_BEGAN">YM Started</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="YYYYMM_BEGAN" [(ngModel)]="BSTCBSSA.YYYYMM_BEGAN" /></div>
+    </div>
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-4"><label for="INACTIVE_IND">Inactive</label></div>
+      <div class="ui-grid-col-8">
+        <p-checkbox [(ngModel)]="BSTCBSSA.INACTIVE_IND" binary="checkbox"></p-checkbox>
+      </div>
+    </div>
+
+  </div>
+
+  <p-footer>
+    &copy; 2017 Applied Business Systems, Inc.
+  </p-footer>
+</p-panel>

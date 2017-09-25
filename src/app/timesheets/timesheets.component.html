@@ -1,3 +1,48 @@
-<p>
-  timesheets works!
-</p>
+<p-panel>
+  <p-header>
+    Analyst Profile
+  </p-header>
+
+  <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="BSTCBSB2s">
+
+    <h3>Timesheets for {{ SYS_ANALYST_ID }} for {{ BILLING_PERIOD }}</h3>
+
+
+    <div class="card card-body" style="width:100%">
+      <p-dataTable [value]="BSTCBSB2s" [resizableColumns]="true" [editable]=true>
+
+        <p-column *ngFor="let grdColumn of grdFormats.BSTCBSB2s" [field]="grdColumn.COLUMN_NAME" sortable="true" [editable]=true
+          [filter]="true" [style]="{'width': grdColumn.COLUMN_WIDTH + '%'}" [header]="grdColumn.COLUMN_CAPTION" filterMatchMode="contains">
+
+          <ng-template *ngIf="grdColumn.COLUMN_NAME == 'CLIENT_CODE'" let-col let-car="rowData" pTemplate="editor">
+            <p-dropdown [(ngModel)]="car[col.field]" [options]="CLIENT_CODEs" [autoWidth]="false" [style]="{'width':'100%'}" required="true"
+              appendTo="body"></p-dropdown>
+          </ng-template>
+
+          <ng-template *ngIf="grdColumn.COLUMN_NAME == 'PROJECT_CODE'" let-col let-car="rowData" pTemplate="editor">
+            <p-dropdown [(ngModel)]="car[col.field]" [options]="PROJECT_CODEs" [autoWidth]="false" [style]="{'width':'100%'}" required="true"
+              appendTo="body"></p-dropdown>
+          </ng-template>
+
+
+          <ng-template *ngIf="grdColumn.COLUMN_NAME == 'HOURS_CHARGED'" let-col let-car="rowData" pTemplate="body">
+            <span style="text-align: right;" class="td-right">{{car[col.field] | number : '1.2-2'}}</span>
+          </ng-template>
+
+          <ng-template *ngIf="grdColumn.COLUMN_NAME == 'DATE_OF_SERVICE'" let-col let-car="rowData" pTemplate="body">
+            <span>{{car[col.field] | date: 'MM/dd/yyyy'}}</span>
+          </ng-template>
+
+          <!-- <ng-template *ngIf="grdColumn.COLUMN_NAME == 'DATE_OF_SERVICE'" let-col let-car="rowData" pTemplate="editor">
+            <p-calendar [(ngModel)]="car[col.field]" dateFormat="MM/dd/yyyy" dataType="string"></p-calendar> 
+          </ng-template> -->
+          
+        </p-column>
+      </p-dataTable>
+    </div>
+  </div>
+
+  <p-footer>
+    &copy; 2017 Applied Business Systems, Inc.
+  </p-footer>
+</p-panel>
