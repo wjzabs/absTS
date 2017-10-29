@@ -23,6 +23,11 @@
   <div class="ui-g ui-g-nopad">
     <div class="ui-g-2 ui-g-nopad" id="sidegutter">
       <div id="sidenav">
+          <p-menubar >
+              <input type="text" pInputText placeholder="Search">
+              <button pButton label="Logout" icon="fa-sign-out"></button>
+          </p-menubar>
+          
         <p-menu #bigMenu [model]="menuItems"></p-menu>
       </div>
     </div>

@@ -1,0 +1,16 @@
+.ABStab {
+    background-color: lightblue;
+}
+
+#p-tabPanel {
+    background-color: lightblue;
+}
+
+
+#p-tabPanel:hover {
+    background-color: #ECDE5A;
+}
+
+li.selected {
+    background-color: lightblue;
+}

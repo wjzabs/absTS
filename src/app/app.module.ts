@@ -15,7 +15,7 @@ import { MenuModule, PanelModule, DataListModule, ScheduleModule, DialogModule, 
   MultiSelectModule, ListboxModule, SpinnerModule, SliderModule, RatingModule, ContextMenuModule,
   TabViewModule, StepsModule, TreeModule, GMapModule, DataGridModule, TooltipModule,
   ConfirmDialogModule, GrowlModule, DragDropModule, GalleriaModule, SharedModule, 
-  CheckboxModule, CarouselModule, MessagesModule
+  CheckboxModule, CarouselModule, MessagesModule, MenubarModule
 } from "primeng/primeng";
 
 import {RouterModule, Routes} from "@angular/router";
@@ -30,6 +30,9 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { MyQtipDirective } from './my-qtip.directive';
 import { TodoComponent } from './todo/todo.component';
 import { MenuComponent } from './menu/menu.component';
+import { GLTACCT1Component } from './gltacct1/gltacct1.component';
+import { SPFPRXS1Component } from './spfprxs1/spfprxs1.component';
+import { GLTCLAS1Component } from './gltclas1/gltclas1.component';
 // import { TS2DataService } from "app/services/TSdata";
 
 const appRoutes: Routes = [
@@ -44,6 +47,9 @@ const appRoutes: Routes = [
   { path: "settings", component: SettingsComponent},
   { path: "todo", component: TodoComponent},
   { path: "menu", component: MenuComponent},
+  { path: "GLTACCT1", component: GLTACCT1Component},
+  { path: "GLTCLAS1", component: GLTCLAS1Component},
+  { path: "SPFPRXS1", component: SPFPRXS1Component},
 ];
 
 @NgModule({
@@ -60,7 +66,10 @@ const appRoutes: Routes = [
     StatisticComponent,
     MyQtipDirective,
     TodoComponent,
-    MenuComponent 
+    MenuComponent,
+    GLTACCT1Component,
+    SPFPRXS1Component,
+    GLTCLAS1Component 
   ],
   imports: [
     BrowserModule,
@@ -79,7 +88,8 @@ const appRoutes: Routes = [
     SliderModule, RatingModule, ContextMenuModule,
     TabViewModule, StepsModule, TreeModule, GMapModule,
     DataGridModule, TooltipModule, ConfirmDialogModule,
-    GrowlModule, DragDropModule, GalleriaModule, SharedModule, CarouselModule, MessagesModule
+    GrowlModule, DragDropModule, GalleriaModule, SharedModule, 
+    CarouselModule, MessagesModule, MenubarModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

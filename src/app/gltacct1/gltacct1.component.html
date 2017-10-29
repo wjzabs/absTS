@@ -1,0 +1,142 @@
+<div class="ui-g ui-g-nopad">
+
+  <div id="content-body" class="ui-g-10 ui-g-nopad">
+
+    <p-panel class="absForm">
+      <p-header>
+        GL Account Master
+      </p-header>
+
+      <div class="absForm" class="ui-grid ui-grid-responsive ui-fluid" *ngIf="GLTACCT1 && GLTPARM1">
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2"><label for="ACCT_CODE">Account Code</label></div>
+          <div class="ui-grid-col-2">
+            <input pInputText id="ACCT_CODE" [(ngModel)]="GLTACCT1.ACCT_CODE" />
+          </div>
+          <div class="ui-grid-col-1">
+            <button pButton type="button" (click)="onLookup('GLTACCT1.ACCT_CODE')" icon="fa-search"></button>
+          </div>
+
+          <div class="ui-grid-col-1"></div>
+          <div class="ui-grid-col-1"><label for="ACCT_STATUS">Status</label></div>
+          <div class="ui-grid-col-2">
+            <p-radioButton name="ACCT_STATUS" value="A" label="Active" [(ngModel)]="GLTACCT1.ACCT_STATUS"></p-radioButton><br/>
+            <p-radioButton name="ACCT_STATUS" value="I" label="Inactive" [(ngModel)]="GLTACCT1.ACCT_STATUS"></p-radioButton>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2"><label for="ACCT_DESC">Description</label></div>
+          <div class="ui-grid-col-4"><input pInputText id="ACCT_DESC" [(ngModel)]="GLTACCT1.ACCT_DESC" /></div>
+        </div>
+
+        <br/>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2"><label for="ACCT_TYPE">Account Type</label></div>
+          <div class="ui-grid-col-2">
+            <p-radioButton name="ACCT_TYPE" value="A" label="Asset" [(ngModel)]="GLTACCT1.ACCT_TYPE"></p-radioButton><br/>
+            <p-radioButton name="ACCT_TYPE" value="L" label="Liability" [(ngModel)]="GLTACCT1.ACCT_TYPE"></p-radioButton><br/>
+            <p-radioButton name="ACCT_TYPE" value="E" label="Equity" [(ngModel)]="GLTACCT1.ACCT_TYPE"></p-radioButton>
+          </div>
+          <div class="ui-grid-col-2">
+            <p-radioButton name="ACCT_TYPE" value="I" label="Income" [(ngModel)]="GLTACCT1.ACCT_TYPE"></p-radioButton><br/>
+            <p-radioButton name="ACCT_TYPE" value="X" label="Expense" [(ngModel)]="GLTACCT1.ACCT_TYPE"></p-radioButton>
+          </div>
+        </div>
+
+        <br/>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2"><label for="ACCT_DR_CR_IND">Normal Posting</label></div>
+          <div class="ui-grid-col-4">
+            <p-radioButton name="ACCT_DR_CR_IND" value="D" label="DR" [(ngModel)]="GLTACCT1.ACCT_DR_CR_IND"></p-radioButton><br/>
+            <p-radioButton name="ACCT_DR_CR_IND" value="C" label="CR" [(ngModel)]="GLTACCT1.ACCT_DR_CR_IND"></p-radioButton>
+          </div>
+        </div>
+
+        <br/>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2"><label for="ACCT_CLASS_CODE">Account Class</label></div>
+          <div class="ui-grid-col-2"><input pInputText icon="fa-search" id="ACCT_CLASS_CODE" [(ngModel)]="GLTACCT1.ACCT_CLASS_CODE" /></div>
+          <div class="ui-grid-col-1">
+            <button pButton type="button" (click)="onLookup('GLTCLAS1.ACCT_CLASS_CODE')" icon="fa-search"></button>
+          </div>
+          <div class="ui-grid-col-4"><input pInputText id="ACCT_CLASS_DESC" [(ngModel)]="GLTACCT1.ACCT_CLASS_CODE" /></div>
+        </div>
+
+        <br/>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-4"><label for="ACCT_SUB_CTL">Account is controlled by a Subsidiary Ledger<br/>(No Manual Postings Allowed)</label></div>
+          <div class="ui-grid-col-2">
+            <p-checkbox [(ngModel)]="GLTACCT1.ACCT_SUB_CTL" binary="checkbox"></p-checkbox>
+          </div>
+        </div>
+
+        <br/>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2"><label style="color:red;">Posting Restrictions</label></div>
+        </div>
+        <br/>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-3">
+            <div><label style="text-decoration: underline;" for="ACCT_SEG2_MAND">{{GLTPARM1.GL_PARM_SEG2_DESC}}</label></div>
+            <p-radioButton name="ACCT_SEG2_MAND" value="0" label="Must Use Default" [(ngModel)]="GLTACCT1.ACCT_SEG2_MAND"></p-radioButton><br/>
+            <p-radioButton name="ACCT_SEG2_MAND" value="1" label="May NOT Use Default" [(ngModel)]="GLTACCT1.ACCT_SEG2_MAND"></p-radioButton><br/>
+            <p-radioButton name="ACCT_SEG2_MAND" value="2" label="May Use Any Value" [(ngModel)]="GLTACCT1.ACCT_SEG2_MAND"></p-radioButton>
+          </div>
+          <div class="ui-grid-col-3">
+            <div><label style="text-decoration: underline;" for="ACCT_SEG3_MAND">{{GLTPARM1.GL_PARM_SEG3_DESC}}</label></div>
+            <p-radioButton name="ACCT_SEG3_MAND" value="0" label="Must Use Default" [(ngModel)]="GLTACCT1.ACCT_SEG3_MAND"></p-radioButton><br/>
+            <p-radioButton name="ACCT_SEG3_MAND" value="1" label="May NOT Use Default" [(ngModel)]="GLTACCT1.ACCT_SEG3_MAND"></p-radioButton><br/>
+            <p-radioButton name="ACCT_SEG3_MAND" value="2" label="May Use Any Value" [(ngModel)]="GLTACCT1.ACCT_SEG3_MAND"></p-radioButton>
+          </div>
+          <div class="ui-grid-col-3">
+            <div><label style="text-decoration: underline;" for="ACCT_SEG4_MAND">{{GLTPARM1.GL_PARM_SEG4_DESC}}</label></div>
+            <p-radioButton name="ACCT_SEG4_MAND" value="0" label="Must Use Default" [(ngModel)]="GLTACCT1.ACCT_SEG4_MAND"></p-radioButton><br/>
+            <p-radioButton name="ACCT_SEG4_MAND" value="1" label="May NOT Use Default" [(ngModel)]="GLTACCT1.ACCT_SEG4_MAND"></p-radioButton><br/>
+            <p-radioButton name="ACCT_SEG4_MAND" value="2" label="May Use Any Value" [(ngModel)]="GLTACCT1.ACCT_SEG4_MAND"></p-radioButton>
+          </div>
+        </div>
+
+      </div>
+
+      <p-dialog [(visible)]="display" modal="modal" width="600" [responsive]="true">
+        <p-header>
+          {{ASFCODE1.VIEW_DESC}}
+        </p-header>
+
+        <p-dataTable #ASTCODE1 [value]="ASTCODE1s" [editable]="false" [(selection)]="selectedRows" [dataKey]="ASFCODE1.COLUMN_NAME">
+          <p-column [selectionMode]="ASFCODE1.selectionMode" header="Sel" [style]="{'width': '5%'}"></p-column>
+          <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [editable]="false" [style]="{'width': col.width + '%'}">
+          </p-column>
+        </p-dataTable>
+
+        <p-footer>
+          <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="ASTCODE1.exportCSV()"></button>
+          <button type="button" pButton icon="fa-check" (click)="selectOK()" label="OK"></button>
+          <button type="button" pButton icon="fa-close" (click)="display=false" label="Cancel"></button>
+        </p-footer>
+      </p-dialog>
+
+
+      <p-footer>
+        &copy; 2017 Applied Business Systems, Inc.
+      </p-footer>
+    </p-panel>
+
+  </div>
+
+  <div class="ui-g-2 ui-g-nopad" id="sidegutter">
+    <div id="sidenav">
+      <p-menu [model]="controlPanel"></p-menu>
+
+      <div style="color: white;">
+          <div><label for="ASFCODEM">Default Mode</label></div>
+          <p-radioButton name="DEFAULT_MODE" value="N" label="New" [(ngModel)]="ASFCODEM.DEFAULT_MODE"></p-radioButton>
+          <p-radioButton name="DEFAULT_MODE" value="E" label="Edit" [(ngModel)]="ASFCODEM.DEFAULT_MODE"></p-radioButton>
+          <p-radioButton name="DEFAULT_MODE" value="V" label="View" [(ngModel)]="ASFCODEM.DEFAULT_MODE"></p-radioButton>
+        </div>
+
+    </div>
+  </div>
+</div>

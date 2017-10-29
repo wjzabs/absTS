@@ -44,7 +44,7 @@ export class DataService {
         // let body = {"BILLING_PERIOD": BILLING_PERIOD, "SYS_ANALYST_ID": SYS_ANALYST_ID};      
         let body = {};
         let myParams = new URLSearchParams();
-        myParams.append('id', SYS_ANALYST_ID);	
+        myParams.append('id', SYS_ANALYST_ID);
         let myHeaders = new Headers();
         myHeaders.append('Authorization', this.ABS_Authorization);
         myHeaders.append('Content-Type', "application/json");
@@ -56,10 +56,28 @@ export class DataService {
                 console.log(response);
                 return response.json();
             })
-            // .catch(this.handleError);
+        // .catch(this.handleError);
     }
 
- 
+
+
+
+    getASTTODO1s(): Observable<any> {
+        return this.http.get(`${this.baseUrl}Get_ASTTODO1s`, this.getHeaders())
+            .map((response: Response) => {
+                // let x:any = response.json();
+                return response.json();
+            })
+    }
+
+    putASTTODO1s(ASTTODO1s): Observable<any> {
+        let body = { "ASTTODO1s": ASTTODO1s };
+         return this.http.post(`${this.baseUrl}Put_ASTTODO1s`, body, this.getHeaders())
+            .map((response: Response) => {
+                // let x:any = response.json();
+                return response.json();
+            })
+    }
 
     getClients(): Observable<any> {
 
@@ -135,15 +153,30 @@ export class DataService {
 
     getTimesheet(PO_ORDER_NO): Observable<any> {
         let body = { "PO_ORDER_NO": PO_ORDER_NO };
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json'); //x-www-form-urlencoded
-        headers.append('Authorization', this.ABS_Authorization);
 
-        return this.http.post(`${this.baseUrl}GetTimesheet`, body, { headers: headers })
+        return this.http.post(`${this.baseUrl}GetTimesheet`, body, this.getHeaders())
             .map((response: Response) => {
                 // this.POTORDR1 = response.json().POTORDR1;
                 this.BSTCBSB2s = response.json().BSTCBSB2s;
                 return this.BSTCBSB2s;
+            })
+    }
+
+    
+    getRecord(TABLE_NAME: String, keyColumns: string[], keyValues: string[]): Observable<any> {
+        let body = { "TABLE_NAME": TABLE_NAME, "keyColumns": keyColumns, "keyValues": keyValues};
+        return this.http.post(`${this.baseUrl}GetRecord`, body, this.getHeaders())
+            .map((response: Response) => {
+                // this.BSTCBSB2s = response.json().BSTCBSB2s;
+                return response.json();
+            })
+    }
+    
+    getRecords(TABLE_NAME: String, keyColumns: string[], keyValues: string[], sqlWhere: string): Observable<any> {
+        let body = { "TABLE_NAME": TABLE_NAME, "keyColumns": keyColumns, "keyValues": keyValues, "sqlWhere": sqlWhere};
+        return this.http.post(`${this.baseUrl}GetRecords`, body, this.getHeaders())
+            .map((response: Response) => {
+                return response.json();
             })
     }
 

@@ -46,6 +46,9 @@ export class AppComponent implements OnInit, AfterViewInit {
       {label: 'Settings', icon: 'fa-sliders', routerLink: ['/settings'], command: (event) => handleSelected(event)},
       {label: 'Todo', icon: 'fa-list-ol', routerLink: ['/todo'], command: (event) => handleSelected(event)},
       {label: 'Menu', icon: 'fa-columns', routerLink: ['/menu'], command: (event) => handleSelected(event)},
+      {label: 'Accounts', icon: 'fa-database', routerLink: ['/GLTACCT1'], command: (event) => handleSelected(event)},
+      {label: 'Account Classes', icon: 'fa-bitbucket', routerLink: ['/GLTCLAS1'], command: (event) => handleSelected(event)},
+      {label: 'Promo Expense Summary', icon: 'fa-desktop', routerLink: ['/SPFPRXS1'], command: (event) => handleSelected(event)},
     ]
 
     this.miniMenuItems = [];

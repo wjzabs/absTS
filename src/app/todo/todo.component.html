@@ -1,3 +1,140 @@
-<p>
-  todo works!
-</p>
+<p-panel>
+  <p-header>
+    Todo List
+  </p-header>
+
+  <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="ASTTODO1">
+
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-2"><label for="TODO_DESC">New Task Description</label></div>
+      <div class="ui-grid-col-6"><input pInputText id="TODO_DESC" [(ngModel)]="ASTTODO1.TODO_DESC" (keyup.enter)="keyPressed($event)" /></div>
+    </div>
+
+    <hr/>
+
+    <p-tabView>
+      <p-tabPanel header="Static List using DataList" class="ABStab">
+
+        <p-dataList [value]="ASTTODO1s" [paginator]="true" [rows]="5">
+          <p-header>
+            List of Tasks
+          </p-header>
+          <ng-template let-ASTTODO1 pTemplate="item">
+            <div class="ui-g ui-fluid ASTTODO1-item">
+
+              <div class="ui-g-12 ui-md-9 ASTTODO1-details">
+                <div class="ui-g">
+
+                  <div class="ui-g-2 ui-sm-6" style="font-weight: bold; color:blue">Task No</div>
+                  <div class="ui-g-10 ui-sm-6">{{ASTTODO1.TODO_NO}}</div>
+
+                  <div class="ui-g-2 ui-sm-6">Task Desc</div>
+                  <div class="ui-g-10 ui-sm-6">{{ASTTODO1.TODO_DESC}}</div>
+
+                  <div class="ui-g-2 ui-sm-6">By </div>
+                  <div class="ui-g-10 ui-sm-6">{{ASTTODO1.TODO_TYPE}}</div>
+
+                  <div class="ui-g-2 ui-sm-6">Form/Object </div>
+                  <div class="ui-g-10 ui-sm-6">{{ASTTODO1.TODO_FORM}}</div>
+
+                  <div class="ui-g-2 ui-sm-6">Created </div>
+                  <div class="ui-g-10 ui-sm-6">{{ASTTODO1.INIT_DATE}}</div>
+                  <div class="ui-g-2 ui-sm-6">By </div>
+                  <div class="ui-g-10 ui-sm-6">{{ASTTODO1.INIT_OPER}}</div>
+
+                </div>
+                <hr/>
+              </div>
+
+            </div>
+          </ng-template>
+        </p-dataList>
+
+      </p-tabPanel>
+
+      <p-tabPanel header="DataTable" class="ABStab">
+
+        <a href="https://www.primefaces.org/primeng/#/datatable">Click here for Documentation</a>
+
+        <!-- selectionMode="single" [(selection)]="selectedRow" dataKey="TODO_NO" -->
+
+        <p-dataTable #dt [value]="ASTTODO1s" [reorderableColumns]="true" [resizableColumns]="true" [rows]="10" [paginator]="true"
+          [editable]="true" >
+          <p-header>List of Tasks</p-header>
+          <p-footer>Choose from the list.</p-footer>
+          <p-column field="TODO_NO" header="Todo#" [style]="{'width':'10%'}"></p-column>
+          <p-column field="TODO_DESC" header="Description" [style]="{'width':'50%'}" [editable]="true" [filter]="true" filterPlaceholder="Search"></p-column>
+          <p-column field="TODO_TYPE" header="Type" [style]="{'width':'20%'}" [filter]="true" filterPlaceholder="contains"></p-column>
+          <p-column field="FORM_NAME" header="Form" [style]="{'width':'20%'}" [filter]="true" filterPlaceholder="endsWith"></p-column>
+          <p-column field="INIT_DATE" header="Created" [style]="{'width':'20%'}" [editable]="true">
+            <ng-template let-col let-todo="rowData" pTemplate="body">
+              {{todo[col.field]|date }}
+            </ng-template>
+            <ng-template let-col let-todo="rowData" pTemplate="editor">
+              <p-calendar [(ngModel)]="todo[col.field]"></p-calendar>
+            </ng-template>
+          </p-column>
+          <p-column field="INIT_OPER" header="By" [style]="{'width':'20%'}" [editable]="true" sortable="true" [filter]="true">
+            <ng-template let-col let-todo="rowData" pTemplate="editor">
+              <p-dropdown [(ngModel)]="todo[col.field]" [options]="INIT_OPERs" [autoWidth]="false" [style]="{'width':'100%'}" required="true"></p-dropdown>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+        <p-contextMenu #cm [model]="items"></p-contextMenu>
+        <button type="button" pButton (click)="update(dt)" label="Update"></button>
+        <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt.exportCSV()"></button>
+
+      </p-tabPanel>
+
+      <p-tabPanel header="Task Details" class="ABStab">
+        Here are the task details. We might want to offer uploading files, and images. We also might want to allow the entry of multiple
+        lines for detail, each line supporting a rich text box.
+
+      </p-tabPanel>
+
+      <p-tabPanel header="Auto Generated Data Table" class="ABStab">
+
+
+        <p-dataTable [value]="ASTTODO1s" [editable]="true">
+          <p-header>List of Tasks</p-header>
+         
+          <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [editable]="true"
+          [style]="{'width': col.width + '%'}">
+
+          </p-column>
+
+          <p-footer>Click Update to Save Changes
+              <div class="ui-g">
+    
+                <div class="ui-g-2 ui-sm-6">
+                    <button class="ui-g-2 ui-sm-6" type="button" width="200px" pButton (click)="update(dt)" label="Update"></button>                    
+                </div>
+                <div class="ui-g-2 ui-sm-6">
+                    <button class="ui-g-2 ui-sm-6" type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt.exportCSV()"></button>                      
+                  </div>                 
+              </div>                  
+          </p-footer>
+  
+        </p-dataTable>
+
+      </p-tabPanel>
+
+      <p-tabPanel header="Just a plain list" class="ABStab">
+        <ul *ngFor="let ASTTODO1 of ASTTODO1s">
+          <li>
+            {{ASTTODO1.TODO_DESC}}
+            {{ASTTODO1 | json}}
+          </li>
+
+        </ul>
+      </p-tabPanel>
+
+    </p-tabView>
+
+
+  </div>
+
+  <p-footer>
+    &copy; 2017 Applied Business Systems, Inc.
+  </p-footer>
+</p-panel>
